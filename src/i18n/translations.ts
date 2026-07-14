@@ -1,0 +1,186 @@
+export type Locale = "de" | "en";
+export const DEFAULT_LOCALE: Locale = "de";
+export const LOCALE_COOKIE = "locale";
+
+export const translations = {
+  de: {
+    nav: {
+      rewards: "Belohnungen",
+      howItWorks: "So funktioniert's",
+      admin: "Admin",
+      dashboard: "Dashboard",
+      login: "Anmelden",
+      register: "Registrieren",
+      logout: "Abmelden",
+    },
+    hero: {
+      badgeFallback: "Jetzt live",
+      badgeSuffix: "eingelöste Codes bisher",
+      title1: "Für die Leute gemacht,",
+      title2: "die dabei sind.",
+      subtitle:
+        "Du schaust zu, du spielst mit, du bist Teil davon. Hier gibt's einfach was zurück dafür — registrieren, einen Code eingeben, gucken was draus wird.",
+      ctaDashboard: "Zu deinem Dashboard →",
+      ctaHowItWorks: "So funktioniert's",
+      secureNote: "Dein Passwort ist nur für diese Seite — nicht dein Roblox-Passwort.",
+    },
+    community: {
+      playersConnected: "verbundene Spieler",
+      codesRedeemed: "eingelöste Codes",
+      justHappened: "Gerade passiert",
+      redeemedFor: "hat einen Code eingelöst für",
+    },
+    rewards: {
+      heading: "Was ein Code freischalten kann",
+      sub: "Nichts hier ist von der Stange. Jeder Code wird von Hand eingerichtet, mit eigener Belohnung und eigenen Regeln.",
+      ticket: { title: "Gewinnspiel-Lose", desc: "Jeder Code gibt Lose für die nächste Robux-Verlosung." },
+      points: { title: "Event-Punkte", desc: "Steig in der Saison-Rangliste auf und schalte Meilenstein-Boni frei." },
+      roles: { title: "Exklusive Rollen", desc: "Schalte Discord- und Ingame-Rollen frei, die der Community vorbehalten sind." },
+      access: { title: "Event-Zugang", desc: "Früher oder exklusiver Zugang zu zeitlich begrenzten Community-Events." },
+    },
+    steps: {
+      heading: "So funktioniert's",
+      step1: { title: "Konto erstellen", desc: "Wähle einen Nutzernamen und ein eigenes Passwort — bitte nicht dein Roblox-Passwort. Deinen Roblox-Usernamen brauchen wir zusätzlich, damit wir wissen, wer du im Spiel bist." },
+      step2: { title: "Code eingeben", desc: "Codes findest du in Videos, Streams und Ankündigungen. In Sekunden im Dashboard eingelöst." },
+      step3: { title: "Belohnung abholen", desc: "Lose, Punkte und Rollen landen sofort auf deinem Profil. Gewinner werden live gezogen und auf Discord bekanntgegeben." },
+    },
+    note: {
+      quote:
+        "Wir haben das gebaut, weil ein Code in den Chat tippen und hoffen, dass jemand die Gewinnerliste screenshottet, einfach nicht mehr reicht. Jedes Los wird nachverfolgt, jede Ziehung ist zufällig und nachvollziehbar, und jeder Code wurde von einer echten Person eingerichtet. Wenn sich mal was komisch anfühlt, sag uns Bescheid.",
+      signature: "— Das Proplays Galaxy Team",
+    },
+    finalCta: {
+      heading: "Hast du einen Code? Lass uns gucken, was er bringt.",
+      sub: "Dauert etwa zehn Sekunden.",
+      ctaOpen: "Dashboard öffnen",
+    },
+    footer: {
+      disclaimer:
+        "Proplays Galaxy Rewards ist eine unabhängige Community-Plattform und steht in keiner Verbindung zu Roblox Corporation.",
+    },
+    auth: {
+      loginTitle: "Willkommen zurück",
+      loginSub: "Melde dich mit deinem Nutzernamen an.",
+      registerTitle: "Konto erstellen",
+      registerSub: "Nur für diese Seite — nicht dein Roblox-Passwort.",
+      username: "Nutzername",
+      password: "Passwort",
+      robloxUsername: "Dein Roblox-Username",
+      robloxUsernameHint: "Wird nicht überprüft durch Login, nur öffentlich abgeglichen — bitte deinen echten Roblox-Namen angeben.",
+      passwordHint: "Mindestens 8 Zeichen, mit Buchstabe und Zahl. Bitte NICHT dein Roblox-Passwort verwenden.",
+      submitLogin: "Anmelden",
+      submitRegister: "Konto erstellen",
+      switchToRegister: "Noch kein Konto? Registrieren",
+      switchToLogin: "Schon ein Konto? Anmelden",
+      loading: "Einen Moment…",
+    },
+    dashboard: {
+      connected: "Konto verbunden",
+      robloxVerified: "Roblox-Konto gefunden und bestätigt",
+      robloxUnverified: "Roblox-Username konnte nicht automatisch bestätigt werden",
+      tickets: "Gewinnspiel-Lose",
+      points: "Punkte",
+      redeemTitle: "Code einlösen",
+      redeemSub: "Codes werden in Videos, Streams und Discord-Ankündigungen geteilt.",
+      redeemPlaceholder: "CODE-HIER-EINGEBEN",
+      redeemButton: "Einlösen",
+      redeemLoading: "Wird eingelöst…",
+      historyTitle: "Letzte Einlösungen",
+      historyEmpty: "Noch keine Codes eingelöst — dein erster wartet oben.",
+    },
+    maintenance: {
+      title: "Gleich wieder da",
+      desc: "Galaxy Rewards wird kurz gewartet. Schau gleich nochmal vorbei.",
+    },
+  },
+  en: {
+    nav: {
+      rewards: "Rewards",
+      howItWorks: "How it works",
+      admin: "Admin",
+      dashboard: "Dashboard",
+      login: "Sign in",
+      register: "Register",
+      logout: "Sign out",
+    },
+    hero: {
+      badgeFallback: "Live now",
+      badgeSuffix: "codes redeemed so far",
+      title1: "Made for the people",
+      title2: "who show up.",
+      subtitle:
+        "You watch, you play, you're part of this. This is just the place where that gets something back — create an account, drop in a code, and see what it turns into.",
+      ctaDashboard: "Go to your dashboard →",
+      ctaHowItWorks: "See how it works",
+      secureNote: "Your password here is only for this site — never your Roblox password.",
+    },
+    community: {
+      playersConnected: "players connected",
+      codesRedeemed: "codes redeemed",
+      justHappened: "Just happened",
+      redeemedFor: "redeemed a code for",
+    },
+    rewards: {
+      heading: "What a code can unlock",
+      sub: "Nothing here is generic. Every code is set up by hand with its own reward and its own rules.",
+      ticket: { title: "Giveaway tickets", desc: "Every code stacks entries toward the next Robux giveaway draw." },
+      points: { title: "Event points", desc: "Climb the season leaderboard and unlock milestone perks." },
+      roles: { title: "Exclusive roles", desc: "Unlock Discord and in-game roles reserved for the community." },
+      access: { title: "Event access", desc: "Early or exclusive access to limited-time community events." },
+    },
+    steps: {
+      heading: "How it works",
+      step1: { title: "Create an account", desc: "Pick a username and your own password — please don't reuse your Roblox password. We also need your Roblox username so we know who you are in-game." },
+      step2: { title: "Enter a code", desc: "Find codes in videos, streams, and announcements, then redeem them from your dashboard in seconds." },
+      step3: { title: "Collect your reward", desc: "Tickets, points, and roles land on your profile instantly. Winners are drawn live and announced on Discord." },
+    },
+    note: {
+      quote:
+        "We built this because typing a code into a chat and hoping someone screenshots the winner list isn't good enough anymore. Every ticket here is tracked, every draw is random and auditable, and every code was set up by an actual person. If something ever feels off, tell us.",
+      signature: "— The Proplays Galaxy team",
+    },
+    finalCta: {
+      heading: "Got a code? Let's see what it does.",
+      sub: "Takes about ten seconds.",
+      ctaOpen: "Open your dashboard",
+    },
+    footer: {
+      disclaimer:
+        "Proplays Galaxy Rewards is an independent community platform and is not operated by or affiliated with Roblox Corporation.",
+    },
+    auth: {
+      loginTitle: "Welcome back",
+      loginSub: "Sign in with your username.",
+      registerTitle: "Create your account",
+      registerSub: "This site only — never your Roblox password.",
+      username: "Username",
+      password: "Password",
+      robloxUsername: "Your Roblox username",
+      robloxUsernameHint: "Not verified via login, only checked publicly — please enter your real Roblox name.",
+      passwordHint: "At least 8 characters, with a letter and a number. Please do NOT reuse your Roblox password.",
+      submitLogin: "Sign in",
+      submitRegister: "Create account",
+      switchToRegister: "No account yet? Register",
+      switchToLogin: "Already have an account? Sign in",
+      loading: "One moment…",
+    },
+    dashboard: {
+      connected: "Account connected",
+      robloxVerified: "Roblox account found and confirmed",
+      robloxUnverified: "Couldn't automatically confirm this Roblox username",
+      tickets: "Giveaway Tickets",
+      points: "Points",
+      redeemTitle: "Redeem a code",
+      redeemSub: "Codes are shared in videos, streams, and Discord announcements.",
+      redeemPlaceholder: "ENTER-CODE-HERE",
+      redeemButton: "Redeem",
+      redeemLoading: "Redeeming…",
+      historyTitle: "Recent redemptions",
+      historyEmpty: "No codes redeemed yet — your first one is waiting above.",
+    },
+    maintenance: {
+      title: "Back in a moment",
+      desc: "Galaxy Rewards is getting a quick tune-up. Check back shortly.",
+    },
+  },
+} as const;

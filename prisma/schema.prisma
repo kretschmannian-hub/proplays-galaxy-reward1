@@ -1,0 +1,156 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String   @id @default(cuid())
+
+  // Site login — completely separate from Roblox. The password the user
+  // sets here is never their Roblox password; we never see or ask for that.
+  username     String   @unique // login handle, chosen at signup
+  passwordHash String
+
+  // Roblox identity is self-reported (not OAuth-verified) — see
+  // src/lib/robloxLookup.ts. We look the username up against Roblox's
+  // public API purely to confirm it exists and to fetch a display name /
+  // avatar; this does NOT prove the site user actually owns that account.
+  robloxUsername    String  @unique
+  robloxUserId      String? // Roblox's numeric ID, if the lookup succeeded
+  robloxDisplayName String?
+  robloxAvatarUrl   String?
+  robloxVerified    Boolean @default(false) // true only if the lookup succeeded
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  isBanned     Boolean @default(false)
+  bannedReason String?
+
+  points          Int @default(0)
+  giveawayTickets Int @default(0)
+
+  // Brute-force lockout (in addition to IP-based rate limiting)
+  failedLoginAttempts Int       @default(0)
+  lockedUntil         DateTime?
+
+  sessions     Session[]
+  redemptions  Redemption[]
+  eventEntries EventEntry[]
+
+  lastSeenAt DateTime @default(now())
+
+  @@index([username])
+  @@index([robloxUsername])
+}
+
+model Session {
+  id        String   @id @default(cuid())
+  userId    String
+  tokenHash String   @unique // SHA-256 of the session token — the raw token only ever lives in the user's cookie
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+  userAgent String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+}
+
+model Code {
+  id            String    @id @default(cuid())
+  code          String    @unique
+  label         String?
+
+  rewardType    RewardType
+  rewardAmount  Int        @default(0) // tickets / points / xp / coins
+  rewardRoleId  String?    // for ROLE rewards
+  rewardBadgeId String?    // for BADGE rewards
+
+  maxRedemptions Int?      // null = unlimited
+  timesRedeemed  Int       @default(0)
+  perUserLimit   Int       @default(1)
+
+  startsAt      DateTime?
+  expiresAt     DateTime?
+  isActive      Boolean   @default(true)
+
+  createdAt     DateTime  @default(now())
+  createdBy     String
+
+  redemptions   Redemption[]
+
+  @@index([code])
+}
+
+enum RewardType {
+  GIVEAWAY_TICKET
+  POINTS
+  XP
+  COINS
+  ROLE
+  BADGE
+  EVENT_ACCESS
+}
+
+model Redemption {
+  id        String   @id @default(cuid())
+  userId    String
+  codeId    String
+  redeemedAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  code Code @relation(fields: [codeId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, codeId])
+  @@index([userId])
+  @@index([codeId])
+}
+
+model EventModel {
+  id          String   @id @default(cuid())
+  name        String
+  description String?
+  startsAt    DateTime
+  endsAt      DateTime?
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+
+  entries     EventEntry[]
+
+  @@map("Event")
+}
+
+model EventEntry {
+  id        String   @id @default(cuid())
+  userId    String
+  eventId   String
+  wonPrize  Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  user  User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  event EventModel @relation(fields: [eventId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, eventId])
+}
+
+model Setting {
+  key       String   @id
+  value     String   @db.Text // encrypted at rest for secrets, see lib/security.ts
+  updatedAt DateTime @updatedAt
+}
+
+model AuditLog {
+  id        String   @id @default(cuid())
+  actorId   String   // id of the admin who performed the action
+  action    String
+  target    String?
+  meta      String?  @db.Text
+  createdAt DateTime @default(now())
+
+  @@index([createdAt])
+}
